@@ -9,22 +9,22 @@ public class Response<T> {
     public static final int CODE_SUCCESS = 1;
     public static final int CODE_OFFLINE = 0;
     public static final int CODE_FAIL = -1;
-    private int code;
+    private int status;
     private String msg;
     private T data;
 
-    public Response(int code, String msg, T data) {
-        this.code = code;
+    public Response(int status, String msg, T data) {
+        this.status = status;
         this.msg = msg;
         this.data = data;
     }
 
-    public int getCode() {
-        return code;
+    public int getStatus() {
+        return status;
     }
 
-    public void setCode(int code) {
-        this.code = code;
+    public void setStatus(int status) {
+        this.status = status;
     }
 
     public String getMsg() {

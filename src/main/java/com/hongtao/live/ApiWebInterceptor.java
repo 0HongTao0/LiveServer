@@ -21,13 +21,13 @@ public class ApiWebInterceptor extends HandlerInterceptorAdapter {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String tokne = request.getHeader("Authorization");
         if (tokne == null) {
-            this.setErrorResponse(response, createMsg(MessageContent.MSG_NO_TOIKEN));
+            this.setErrorResponse(response, createMsg(Content.Message.MSG_NO_TOKEN));
             return false;
         }
         try {
             request.setAttribute("userId", JwtUtil.parseJwt(tokne).get(JwtUtil.CLAIMS_USER_ID, String.class));
         } catch (Exception e) {
-            this.setErrorResponse(response, createMsg(MessageContent.MSG_TOIKEN_EXPIRATION));
+            this.setErrorResponse(response, createMsg(Content.Message.MSG_TOKEN_EXPIRATION));
             return false;
         }
         return true;
