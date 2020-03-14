@@ -1,13 +1,17 @@
-import com.hongtao.live.dao.UserEntity;
+import com.hongtao.live.dao.entity.UserEntity;
+import com.sun.org.slf4j.internal.Logger;
+import com.sun.org.slf4j.internal.LoggerFactory;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.criterion.Restrictions;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.sql.Date;
+import java.util.List;
 
 /**
  * Created 2020/3/13.
@@ -19,6 +23,10 @@ public class UserDaoTest {
     SessionFactory sessionFactory = null;
     Session session = null;
     Transaction tx = null;
+
+    private Logger logger =  LoggerFactory.getLogger(getClass());
+
+
     @Before
     public void init() {
         config = new Configuration().configure("/hibernate.cfg.xml");
@@ -26,40 +34,23 @@ public class UserDaoTest {
         session = sessionFactory.openSession();
         tx = session.beginTransaction();
     }
+
     //增加
     @Test
     public void insert() {
-        UserEntity ue = new UserEntity();
-        ue.setName("Anny");
-        ue.setUserId("123");
-        ue.setBirthday(new Date(System.currentTimeMillis()));
-        session.save(ue);
-        tx.commit();
-    }
-    //修改
-    @Test
-    public void update() {
-        UserEntity user = (UserEntity) session.get(UserEntity.class, new Integer(2));
-        user.setName("Penny");
-        session.update(user);
+//        UserEntity ue = new UserEntity();
+//        ue.setNick("Anny");
+//        ue.setUserId("123");
+//        ue.setPassword("123");
+//        ue.setBirthday(new Date(946656000000L));
+//        session.save(ue);
+        Criteria criteria = session.createCriteria(UserEntity.class);
+        criteria.add(Restrictions.eq("userId", "123"));
+        criteria.add(Restrictions.eq("password", "123"));
+        List<UserEntity> users = criteria.list();
+        logger.debug(users.toString());
         tx.commit();
         session.close();
-    }
-    //查找
-    @Test
-    public void getById() {
-        UserEntity user = (UserEntity) session.get(UserEntity.class, new Integer(8));
-        tx.commit();
-        session.close();
-        System.out.println("ID号：" + user.getId() + "；用户名：" + user.getName() +
-                "；UserId：" + user.getUserId() + "；生日：" + user.getBirthday());
-    }
-    //删除
-    @Test
-    public void delete() {
-        UserEntity user = (UserEntity) session.get(UserEntity.class, new Integer(6));
-        session.delete(user);
-        tx.commit();
-        session.close();
+
     }
 }

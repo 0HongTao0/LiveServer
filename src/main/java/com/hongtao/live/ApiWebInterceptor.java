@@ -1,5 +1,7 @@
 package com.hongtao.live;
 
+import com.google.gson.Gson;
+import com.hongtao.live.module.Response;
 import com.hongtao.live.util.JwtUtil;
 
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
@@ -17,27 +19,31 @@ import javax.servlet.http.HttpServletResponse;
 public class ApiWebInterceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        String authorization = request.getHeader("Authorization");
-        if (authorization == null) {
-            this.setErrorResponse(response, "未携带token");
+        String tokne = request.getHeader("Authorization");
+        if (tokne == null) {
+            this.setErrorResponse(response, createMsg(MessageContent.MSG_NO_TOIKEN));
             return false;
         }
-        String token = authorization;
         try {
-            request.setAttribute("user", JwtUtil.parseJwt(token));
+            request.setAttribute("userId", JwtUtil.parseJwt(tokne).get(JwtUtil.CLAIMS_USER_ID, String.class));
         } catch (Exception e) {
-            this.setErrorResponse(response, e.getMessage());
+            this.setErrorResponse(response, createMsg(MessageContent.MSG_TOIKEN_EXPIRATION));
             return false;
         }
         return true;
     }
 
-    protected void setErrorResponse(HttpServletResponse response, String message) throws IOException {
+    public void setErrorResponse(HttpServletResponse response, String message) throws IOException {
         response.setHeader("Content-type", "text/html;charset=UTF-8");
         response.setCharacterEncoding("UTF-8");
         response.getWriter().write(message);
         response.getWriter().flush();
         response.getWriter().close();
+    }
 
+    private String createMsg(String msg) {
+        Gson gson = new Gson();
+        Response<Object> response = new Response<>(Response.CODE_OFFLINE, msg, new Object());
+        return gson.toJson(response);
     }
 }

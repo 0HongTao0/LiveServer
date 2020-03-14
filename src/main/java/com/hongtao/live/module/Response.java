@@ -5,14 +5,15 @@ package com.hongtao.live.module;
  *
  * @author HongTao
  */
-public class ResponseBody<T> {
-    public static final int CODE_SUCCESS = 0;
+public class Response<T> {
+    public static final int CODE_SUCCESS = 1;
+    public static final int CODE_OFFLINE = 0;
     public static final int CODE_FAIL = -1;
     private int code;
     private String msg;
     private T data;
 
-    public ResponseBody(int code, String msg, T data) {
+    public Response(int code, String msg, T data) {
         this.code = code;
         this.msg = msg;
         this.data = data;

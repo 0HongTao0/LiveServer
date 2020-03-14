@@ -21,7 +21,7 @@
         <mvc:interceptor>
             <mvc:mapping path="/**"/>
             <!-- 排除登录-->
-            <mvc:exclude-mapping path="/login"/>
+            <mvc:exclude-mapping path="/loginAction/login"/>
             <bean class="com.hongtao.live.ApiWebInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>

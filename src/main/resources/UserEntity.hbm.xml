@@ -4,10 +4,17 @@
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
-    <class name="com.hongtao.live.dao.UserEntity" table="user" schema="Live">
+    <class name="com.hongtao.live.dao.entity.UserEntity" table="user" schema="Live">
         <id name="id" column="id"/>
         <property name="userId" column="userId"/>
-        <property name="name" column="name"/>
+        <property name="password" column="password"/>
+        <property name="nick" column="nick"/>
         <property name="birthday" column="birthday"/>
+        <property name="introduction" column="introduction"/>
+        <property name="gender" column="gender"/>
+        <property name="job" column="job"/>
+        <property name="address" column="address"/>
+        <property name="liveIntroduction" column="liveIntroduction"/>
+        <property name="avatar" column="avatar"/>
     </class>
 </hibernate-mapping>

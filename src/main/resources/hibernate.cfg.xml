@@ -5,7 +5,7 @@
 <hibernate-configuration>
     <session-factory>
         <!-- Database connection settings -->
-        <property name="connection.url">jdbc:mysql://localhost:3306/Live</property>
+        <property name="connection.url">jdbc:mysql://localhost:3306/Live?useUnicode=true&amp;characterEncoding=UTF8</property>
         <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
         <property name="connection.username">root</property>
         <property name="connection.password">root</property>
@@ -28,7 +28,7 @@
         <!-- Drop and re-create the database schema on startup -->
         <property name="hbm2ddl.auto">update</property>
         <mapping resource="UserEntity.hbm.xml"/>
-        <mapping class="com.hongtao.live.dao.UserEntity"/>
+        <mapping class="com.hongtao.live.dao.entity.UserEntity"/>
 
     </session-factory>
 </hibernate-configuration>

@@ -16,14 +16,23 @@ import io.jsonwebtoken.SignatureAlgorithm;
  * @author HongTao
  */
 public class JwtUtil {
-    private static String key = "WkskpDhSkuBUOP*ITB*123123123";
-    public  static  String createJwt(String userId){
-        //默认签发有效期24小时的token
-        return createJwt(userId,"subject","issure",86400000);
+    private static final String KEY = "WkskpDhSkuBUOP*ITB*935245421";
+    private static final String SUBJECT = "LoginAndLogout";
+    private static final String ISSURE = "LiveServer";
+
+    public static final String CLAIMS_USER_ID = "userId";
+
+    private static final long EXPIRATION = 86400000 * 7;
+
+    public static String createJwt(String userId) {
+        //默认签发有效期7天的token
+        return createJwt(userId, SUBJECT, ISSURE, EXPIRATION);
     }
-    public static String createJwt(String id, String subject, String issure, long till) {
-        JwtBuilder jwtBuilder = Jwts.builder().setId(id)
-                .signWith(SignatureAlgorithm.HS256, new SecretKeySpec(DatatypeConverter.parseBase64Binary(key), SignatureAlgorithm.HS256.getJcaName()))
+
+    public static String createJwt(String userId, String subject, String issure, long till) {
+        JwtBuilder jwtBuilder = Jwts.builder()
+                .claim(CLAIMS_USER_ID, userId)
+                .signWith(SignatureAlgorithm.HS256, new SecretKeySpec(DatatypeConverter.parseBase64Binary(KEY), SignatureAlgorithm.HS256.getJcaName()))
                 .setIssuer(issure)
                 .setSubject(subject)
                 .setExpiration(new Date(System.currentTimeMillis() + till));
@@ -31,7 +40,7 @@ public class JwtUtil {
     }
 
     public static Claims parseJwt(String token) throws Exception {
-        Claims claims = Jwts.parser().setSigningKey(DatatypeConverter.parseBase64Binary(key)).parseClaimsJws(token).getBody();
+        Claims claims = Jwts.parser().setSigningKey(DatatypeConverter.parseBase64Binary(KEY)).parseClaimsJws(token).getBody();
         return claims;
 
 
