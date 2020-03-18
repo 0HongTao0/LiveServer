@@ -45,10 +45,9 @@ public class UserDaoTest {
 //        ue.setBirthday(new Date(946656000000L));
 //        session.save(ue);
         Criteria criteria = session.createCriteria(UserEntity.class);
-        criteria.add(Restrictions.eq("userId", "123"));
-        criteria.add(Restrictions.eq("password", "123"));
+        criteria.add(Restrictions.eq("userId", "935245421"));
         List<UserEntity> users = criteria.list();
-        logger.debug(users.toString());
+        logger.warn(users.toString());
         tx.commit();
         session.close();
 

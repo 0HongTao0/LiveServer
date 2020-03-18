@@ -1,5 +1,7 @@
 package com.hongtao.live.dao.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.sql.Date;
 import java.util.Objects;
 
@@ -21,10 +23,10 @@ class UserEntity {
     private Date mBirthday = new Date(946656000000L);
     private String mIntroduction = "这人懒的什么都没写下！";
     private int mGender = 1;
-    private String mJob;
-    private String mAddress;
+    private String mJob = "网红兼职";
+    private String mAddress = "";
     private String mLiveIntroduction = "来呀，直播间里面很好玩哦！";
-    private String mAvatar;
+    private String mAvatar = "https://raw.githubusercontent.com/0HongTao0/Blog/master/default_avatar.png";
 
     @Id
     @Column(name = "id")
@@ -47,6 +49,7 @@ class UserEntity {
     }
 
     @Basic
+    @JsonIgnore
     @Column(name = "password")
     public String getPassword() {
         return mPassword;
@@ -157,5 +160,22 @@ class UserEntity {
     @Override
     public int hashCode() {
         return Objects.hash(mId, mUserId, mPassword, mNick, mBirthday, mIntroduction, mGender, mJob, mAddress, mLiveIntroduction, mAvatar);
+    }
+
+    @Override
+    public String toString() {
+        return "UserEntity{" +
+                "mId=" + mId +
+                ", mUserId='" + mUserId + '\'' +
+                ", mPassword='" + mPassword + '\'' +
+                ", mNick='" + mNick + '\'' +
+                ", mBirthday=" + mBirthday +
+                ", mIntroduction='" + mIntroduction + '\'' +
+                ", mGender=" + mGender +
+                ", mJob='" + mJob + '\'' +
+                ", mAddress='" + mAddress + '\'' +
+                ", mLiveIntroduction='" + mLiveIntroduction + '\'' +
+                ", mAvatar='" + mAvatar + '\'' +
+                '}';
     }
 }

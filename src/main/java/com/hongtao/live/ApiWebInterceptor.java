@@ -17,15 +17,16 @@ import javax.servlet.http.HttpServletResponse;
  * @author HongTao
  */
 public class ApiWebInterceptor extends HandlerInterceptorAdapter {
+    private static final String HEADER_TOKEN = "token";
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        String tokne = request.getHeader("Authorization");
-        if (tokne == null) {
+        String token = request.getHeader(HEADER_TOKEN);
+        if (token == null) {
             this.setErrorResponse(response, createMsg(Content.Message.MSG_NO_TOKEN));
             return false;
         }
         try {
-            request.setAttribute("userId", JwtUtil.parseJwt(tokne).get(JwtUtil.CLAIMS_USER_ID, String.class));
+            request.setAttribute("userId", JwtUtil.parseJwt(token).get(JwtUtil.CLAIMS_USER_ID, String.class));
         } catch (Exception e) {
             this.setErrorResponse(response, createMsg(Content.Message.MSG_TOKEN_EXPIRATION));
             return false;

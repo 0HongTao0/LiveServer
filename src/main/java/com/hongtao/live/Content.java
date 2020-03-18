@@ -13,7 +13,7 @@ public interface Content {
 
         public static final String MSG_LOGIN_SUCCESS = "登录成功";
         public static final String MSG_LOGIN_FAIL = "登录失败，请检查账号密码。";
-        public static final String MSG_REGISTERED_SUCCESS = "注册成功";
+        public static final String MSG_REGISTERED_SUCCESS = "注册成功,请登录。";
         public static final String MSG_REGISTERED_FAIL_SAME_ID = "ID已存在";
     }
 
