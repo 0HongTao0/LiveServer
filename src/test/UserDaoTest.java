@@ -2,10 +2,7 @@ import com.hongtao.live.dao.entity.UserEntity;
 import com.sun.org.slf4j.internal.Logger;
 import com.sun.org.slf4j.internal.LoggerFactory;
 
-import org.hibernate.Criteria;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
+import org.hibernate.*;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.criterion.Restrictions;
 import org.junit.Before;
@@ -24,7 +21,7 @@ public class UserDaoTest {
     Session session = null;
     Transaction tx = null;
 
-    private Logger logger =  LoggerFactory.getLogger(getClass());
+    private Logger logger = LoggerFactory.getLogger(getClass());
 
 
     @Before
@@ -51,5 +48,15 @@ public class UserDaoTest {
         tx.commit();
         session.close();
 
+    }
+
+    @Test
+    public void select() {
+        Query query =
+                session.createQuery("from RoomEntity as r, UserEntity as u where r.userId = :userId and u.userId = :userId and u.userId = r.userId")
+                        .setString("userId", "935245421")
+                        .setString("userId", "935245421");
+        List<Object> list = query.list();
+        logger.warn(list.toString());
     }
 }

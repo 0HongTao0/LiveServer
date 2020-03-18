@@ -25,13 +25,13 @@ import javax.servlet.http.HttpServletRequest;
  * @author HongTao
  */
 @Controller
-@RequestMapping("/Me")
+@RequestMapping("/me")
 public class MeController {
     private Logger logger =  LoggerFactory.getLogger(getClass());
 
     @RequestMapping(value = "/user", method = {RequestMethod.GET})
     @ResponseBody
-    public Response<UserEntity> login(HttpServletRequest request) {
+    public Response<UserEntity> getUser(HttpServletRequest request) {
         String userId = (String) request.getAttribute("userId");
         logger.warn("userId = " + userId);
         Session session = Dao.getInstance().getSession();
@@ -41,6 +41,6 @@ public class MeController {
         logger.warn(users.get(0).toString());
         session.close();
 
-        return new Response<>(Response.CODE_SUCCESS, Content.Message.MSG_LOGIN_SUCCESS, users.get(0));
+        return new Response<>(Response.CODE_SUCCESS, Content.Message.MSG_ME_GET_SUCCESS, users.get(0));
     }
 }

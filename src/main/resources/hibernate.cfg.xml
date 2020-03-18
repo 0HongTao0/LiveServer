@@ -29,6 +29,8 @@
         <property name="hbm2ddl.auto">update</property>
         <mapping resource="UserEntity.hbm.xml"/>
         <mapping class="com.hongtao.live.dao.entity.UserEntity"/>
+        <mapping class="com.hongtao.live.dao.entity.RoomEntity"/>
+        <mapping resource="RoomEntity.hbm.xml"/>
 
     </session-factory>
 </hibernate-configuration>
