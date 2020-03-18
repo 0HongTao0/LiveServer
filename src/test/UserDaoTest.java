@@ -1,5 +1,7 @@
+import com.hongtao.live.Content;
 import com.hongtao.live.dao.entity.RoomEntity;
 import com.hongtao.live.dao.entity.UserEntity;
+import com.hongtao.live.module.RoomData;
 import com.sun.org.slf4j.internal.Logger;
 import com.sun.org.slf4j.internal.LoggerFactory;
 
@@ -9,6 +11,7 @@ import org.hibernate.criterion.Restrictions;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -31,6 +34,21 @@ public class UserDaoTest {
         sessionFactory = config.buildSessionFactory();
         session = sessionFactory.openSession();
         tx = session.beginTransaction();
+    }
+
+    @Test
+    public void getRooms() {
+        Query query =
+                session.createQuery("from RoomEntity as r, UserEntity as u where u.userId = r.userId and r.living = 1");
+        List<Object> list = query.list();
+        session.close();
+        List<RoomData> roomData = new ArrayList<>();
+        for (int i = 0; i < list.size(); i++) {
+            RoomEntity roomEntity = (RoomEntity) ((Object[]) list.get(i))[0];
+            UserEntity userEntity = (UserEntity) ((Object[]) list.get(i))[1];
+            roomData.add(RoomData.createRoom(Content.Code.CODE_ROOM_EXIST, roomEntity, userEntity));
+        }
+        logger.warn(roomData.toString());
     }
 
     //增加

@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -109,5 +110,22 @@ public class RoomController {
         session2.close();
 
         return new Response<>(Response.CODE_SUCCESS, Content.Message.MSG_ROOM_UPDATE_SUCCESS, RoomData.createRoom(Content.Code.CODE_ROOM_UPDATE, roomEntity, users.get(0)));
+    }
+
+    @RequestMapping("/getRooms")
+    @ResponseBody
+    public Response<List<RoomData>> getRooms() {
+        Session session = Dao.getInstance().getSession();
+        Query query =
+                session.createQuery("from RoomEntity as r, UserEntity as u where u.userId = r.userId and r.living = 1");
+        List<Object> list = query.list();
+        session.close();
+        List<RoomData> roomData = new ArrayList<>();
+        for (int i = 0; i < list.size(); i++) {
+            RoomEntity roomEntity = (RoomEntity) ((Object[]) list.get(i))[0];
+            UserEntity userEntity = (UserEntity) ((Object[]) list.get(i))[1];
+            roomData.add(RoomData.createRoom(Content.Code.CODE_ROOM_EXIST, roomEntity, userEntity));
+        }
+        return new Response<>(Response.CODE_SUCCESS, Content.Message.MSG_ROOM_GET_SUCCESS, roomData);
     }
 }
