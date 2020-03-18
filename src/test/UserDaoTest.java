@@ -1,3 +1,4 @@
+import com.hongtao.live.dao.entity.RoomEntity;
 import com.hongtao.live.dao.entity.UserEntity;
 import com.sun.org.slf4j.internal.Logger;
 import com.sun.org.slf4j.internal.LoggerFactory;
@@ -58,5 +59,17 @@ public class UserDaoTest {
                         .setString("userId", "935245421");
         List<Object> list = query.list();
         logger.warn(list.toString());
+    }
+
+    @Test
+    public void update() {
+        RoomEntity roomEntity = session.get(RoomEntity.class, 0);
+        roomEntity.setRoomName("roomName");
+        roomEntity.setRoomIntroduction("roomIntroduction");
+        roomEntity.setLiving(0);
+        roomEntity.setNum(0);
+        session.saveOrUpdate(roomEntity);
+        session.getTransaction().commit();
+        session.close();
     }
 }
