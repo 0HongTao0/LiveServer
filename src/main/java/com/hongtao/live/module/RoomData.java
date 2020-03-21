@@ -19,12 +19,26 @@ public class RoomData {
     private String mRoomName;
     private String mRoomIntroduction;
     private String avatar;
+    private String mNick;
 
     public RoomData(int code, int roomId, int num, String userId, String url, int living, String roomName, String roomIntroduction, String avatar) {
         this.code = code;
         mRoomId = roomId;
         mNum = num;
         mUserId = userId;
+        mUrl = url;
+        mLiving = living;
+        mRoomName = roomName;
+        mRoomIntroduction = roomIntroduction;
+        this.avatar = avatar;
+    }
+
+    public RoomData(int code, int roomId, int num, String userId, String nick, String url, int living, String roomName, String roomIntroduction, String avatar) {
+        this.code = code;
+        mRoomId = roomId;
+        mNum = num;
+        mUserId = userId;
+        mNick = nick;
         mUrl = url;
         mLiving = living;
         mRoomName = roomName;
@@ -47,12 +61,13 @@ public class RoomData {
         roomData.setRoomName(roomEntity.getRoomName());
         roomData.setRoomIntroduction(roomEntity.getRoomIntroduction());
         roomData.setAvatar(userEntity.getAvatar());
+        roomData.setNick(userEntity.getNick());
 
         return roomData;
     }
 
     public static RoomData createNullRoom() {
-        return new RoomData(Content.Code.CODE_ROOM_NOT_EXIST, 0, 0, "", "", 0, "", "", "");
+        return new RoomData(Content.Code.CODE_ROOM_NOT_EXIST, 0, 0, "", "", "", 0, "", "", "");
     }
 
     public int getCode() {
@@ -125,5 +140,13 @@ public class RoomData {
 
     public void setAvatar(String avatar) {
         this.avatar = avatar;
+    }
+
+    public String getNick() {
+        return mNick;
+    }
+
+    public void setNick(String nick) {
+        mNick = nick;
     }
 }

@@ -26,6 +26,8 @@
             <mvc:exclude-mapping path="/loginAction/registered"/>
             <!-- 排除RTMP-->
             <mvc:exclude-mapping path="/rtmp/**"/>
+            <!-- 排除Rooms-->
+            <mvc:exclude-mapping path="/room/getRooms"/>
 
             <bean class="com.hongtao.live.ApiWebInterceptor"/>
         </mvc:interceptor>
