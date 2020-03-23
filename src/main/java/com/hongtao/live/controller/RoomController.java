@@ -52,7 +52,12 @@ public class RoomController {
             UserEntity userEntity = (UserEntity) ((Object[]) list.get(0))[1];
             return new Response<>(Response.CODE_SUCCESS, Content.Message.MSG_ROOM_GET_SUCCESS, RoomData.createRoom(Content.Code.CODE_ROOM_EXIST, roomEntity, userEntity));
         } else {
-            return new Response<>(Response.CODE_SUCCESS, Content.Message.MSG_ROOM_GET_FAIL, RoomData.createNullRoom());
+            Session session1 = Dao.getInstance().getSession();
+            Criteria criteria = session1.createCriteria(UserEntity.class);
+            criteria.add(Restrictions.eq("userId", userId));
+            List<UserEntity> users = criteria.list();
+            session1.close();
+            return new Response<>(Response.CODE_SUCCESS, Content.Message.MSG_ROOM_GET_FAIL, RoomData.createNullRoom(users.get(0).getNick(), users.get(0).getAvatar()));
         }
     }
 

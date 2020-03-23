@@ -66,8 +66,8 @@ public class RoomData {
         return roomData;
     }
 
-    public static RoomData createNullRoom() {
-        return new RoomData(Content.Code.CODE_ROOM_NOT_EXIST, 0, 0, "", "", "", 0, "", "", "");
+    public static RoomData createNullRoom(String nick, String avatar) {
+        return new RoomData(Content.Code.CODE_ROOM_NOT_EXIST, 0, 0, "", nick, "", 0, "", "", avatar);
     }
 
     public int getCode() {
