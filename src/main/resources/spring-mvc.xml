@@ -28,6 +28,8 @@
             <mvc:exclude-mapping path="/rtmp/**"/>
             <!-- 排除Rooms-->
             <mvc:exclude-mapping path="/room/getRooms"/>
+            <!-- getChatMessage-->
+            <mvc:exclude-mapping path="/chat/getMessage"/>
 
             <bean class="com.hongtao.live.ApiWebInterceptor"/>
         </mvc:interceptor>

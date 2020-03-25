@@ -31,6 +31,8 @@
         <mapping class="com.hongtao.live.dao.entity.UserEntity"/>
         <mapping class="com.hongtao.live.dao.entity.RoomEntity"/>
         <mapping resource="RoomEntity.hbm.xml"/>
+        <mapping class="com.hongtao.live.dao.entity.ChatEntity"/>
+        <mapping resource="ChatEntity.hbm.xml"/>
 
     </session-factory>
 </hibernate-configuration>

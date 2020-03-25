@@ -6,7 +6,7 @@ package com.hongtao.live;
  * @author HongTao
  */
 public interface Content {
-    String IP = "192.168.0.101";
+    String IP = "192.168.0.108";
 
     class Message{
         public static final String MSG_NO_TOKEN = "未携带token";
@@ -24,7 +24,8 @@ public interface Content {
         public static final String MSG_ROOM_CREATE_SUCCESS = "创建直播间成功";
         public static final String MSG_ROOM_UPDATE_SUCCESS = "更新直播间成功";
 
-
+        public static final String MSG_MESSAGE_SEND_SUCCESS = "发送信息成功";
+        public static final String MSG_MESSAGE_GET_SUCCESS = "获取信息成功";
     }
 
     class Code{
