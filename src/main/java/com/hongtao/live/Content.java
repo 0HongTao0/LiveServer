@@ -6,7 +6,7 @@ package com.hongtao.live;
  * @author HongTao
  */
 public interface Content {
-    String IP = "192.168.0.108";
+    String IP = "192.168.0.104";
 
     class Message{
         public static final String MSG_NO_TOKEN = "未携带token";
@@ -38,6 +38,5 @@ public interface Content {
         public static final int CODE_ROOM_NOT_EXIST = -1;
         public static final int CODE_ROOM_CREATE = 2;
         public static final int CODE_ROOM_UPDATE = 3;
-
     }
 }
