@@ -26,6 +26,10 @@ public interface Content {
 
         public static final String MSG_MESSAGE_SEND_SUCCESS = "发送信息成功";
         public static final String MSG_MESSAGE_GET_SUCCESS = "获取信息成功";
+
+        public static final String MSG_ATTENTION_ROOM_SUCCESS = "关注直播间成功";
+        public static final String MSG_GET_OFF_ATTENTION_ROOM_SUCCESS = "取消关注成功";
+        public static final String MSG_GET_ATTENTION_ROOM_SUCCESS = "获取关注成功";
     }
 
     class Code{

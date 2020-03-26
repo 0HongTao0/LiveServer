@@ -5,12 +5,12 @@ package com.hongtao.live.module;
  *
  * @author HongTao
  */
-public class SendMessageData {
+public class NormalResponseData {
     public static final int CODE_SUCCESS = 1;
 
     private int code;
 
-    public SendMessageData(int code) {
+    public NormalResponseData(int code) {
         this.code = code;
     }
 

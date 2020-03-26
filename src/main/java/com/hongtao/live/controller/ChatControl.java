@@ -6,7 +6,7 @@ import com.hongtao.live.dao.entity.ChatEntity;
 import com.hongtao.live.dao.entity.UserEntity;
 import com.hongtao.live.module.MessageData;
 import com.hongtao.live.module.Response;
-import com.hongtao.live.module.SendMessageData;
+import com.hongtao.live.module.NormalResponseData;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -34,7 +34,7 @@ public class ChatControl {
 
     @RequestMapping(value = "/sendMessage", method = RequestMethod.POST)
     @ResponseBody
-    public Response<SendMessageData> sendMessage(HttpServletRequest request
+    public Response<NormalResponseData> sendMessage(HttpServletRequest request
             , @RequestParam int roomId
             , @RequestParam String message
             , @RequestParam int type) {
@@ -50,7 +50,7 @@ public class ChatControl {
         session.save(chatEntity);
         transaction.commit();
         session.close();
-        return new Response<>(Response.CODE_SUCCESS, Content.Message.MSG_MESSAGE_SEND_SUCCESS, new SendMessageData(SendMessageData.CODE_SUCCESS));
+        return new Response<>(Response.CODE_SUCCESS, Content.Message.MSG_MESSAGE_SEND_SUCCESS, new NormalResponseData(NormalResponseData.CODE_SUCCESS));
     }
 
     @RequestMapping(value = "/getMessage", method = RequestMethod.POST)
