@@ -17,8 +17,11 @@ public class AttentionData {
     private String nick;
     private int gender;
     private int roomId;
+    private String url;
+    private int num;
     private String roomName;
     private String roomIntroduction;
+    private boolean isLiving;
     private int attentionId;
     private Timestamp time;
 
@@ -29,10 +32,14 @@ public class AttentionData {
         attentionData.setNick(userEntity.getNick());
         attentionData.setGender(userEntity.getGender());
         attentionData.setRoomId(roomEntity.getRoomId());
+        attentionData.setUrl(roomEntity.getUrl());
+        attentionData.setNum(roomEntity.getNum());
         attentionData.setRoomName(roomEntity.getRoomName());
         attentionData.setRoomIntroduction(roomEntity.getRoomIntroduction());
+        attentionData.setLiving(roomEntity.getLiving() == 1);
         attentionData.setAttentionId(attentionEntity.getAttentionId());
         attentionData.setTime(attentionEntity.getTime());
+
         return attentionData;
     }
 
@@ -44,11 +51,30 @@ public class AttentionData {
                 ", nick='" + nick + '\'' +
                 ", gender=" + gender +
                 ", roomId=" + roomId +
+                ", url='" + url + '\'' +
+                ", num=" + num +
                 ", roomName='" + roomName + '\'' +
                 ", roomIntroduction='" + roomIntroduction + '\'' +
+                ", isLiving=" + isLiving +
                 ", attentionId=" + attentionId +
                 ", time=" + time +
                 '}';
+    }
+
+    public int getNum() {
+        return num;
+    }
+
+    public void setNum(int num) {
+        this.num = num;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public String getUserId() {
@@ -121,5 +147,13 @@ public class AttentionData {
 
     public void setTime(Timestamp time) {
         this.time = time;
+    }
+
+    public boolean isLiving() {
+        return isLiving;
+    }
+
+    public void setLiving(boolean living) {
+        isLiving = living;
     }
 }

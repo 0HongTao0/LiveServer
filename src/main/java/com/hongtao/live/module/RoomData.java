@@ -20,6 +20,7 @@ public class RoomData {
     private String mRoomIntroduction;
     private String avatar;
     private String mNick;
+    private boolean isAttention;
 
     public RoomData(int code, int roomId, int num, String userId, String url, int living, String roomName, String roomIntroduction, String avatar) {
         this.code = code;
@@ -46,6 +47,20 @@ public class RoomData {
         this.avatar = avatar;
     }
 
+    public RoomData(int code, int roomId, int num, String userId, String url, int living, String roomName, String roomIntroduction, String avatar, String nick, boolean isAttention) {
+        this.code = code;
+        mRoomId = roomId;
+        mNum = num;
+        mUserId = userId;
+        mUrl = url;
+        mLiving = living;
+        mRoomName = roomName;
+        mRoomIntroduction = roomIntroduction;
+        this.avatar = avatar;
+        mNick = nick;
+        this.isAttention = isAttention;
+    }
+
     public RoomData() {
     }
 
@@ -67,7 +82,7 @@ public class RoomData {
     }
 
     public static RoomData createNullRoom(String nick, String avatar) {
-        return new RoomData(Content.Code.CODE_ROOM_NOT_EXIST, 0, 0, "", nick, "", 0, "", "", avatar);
+        return new RoomData(Content.Code.CODE_ROOM_NOT_EXIST, 0, 0, "", nick, 0, "", "", "", avatar, false);
     }
 
     public int getCode() {
@@ -148,5 +163,13 @@ public class RoomData {
 
     public void setNick(String nick) {
         mNick = nick;
+    }
+
+    public boolean isAttention() {
+        return isAttention;
+    }
+
+    public void setAttention(boolean attention) {
+        isAttention = attention;
     }
 }
