@@ -2,7 +2,7 @@ package com.hongtao.live.controller;
 
 import com.hongtao.live.Content;
 import com.hongtao.live.dao.Dao;
-import com.hongtao.live.dao.entity.MoneyEntity;
+import com.hongtao.live.dao.entity.MoneyRecordEntity;
 import com.hongtao.live.dao.entity.UserEntity;
 import com.hongtao.live.module.NormalResponseData;
 import com.hongtao.live.module.Response;
@@ -46,7 +46,7 @@ public class MoneyController {
         userEntity.setMoney(userEntity.getMoney() + money);
         session.saveOrUpdate(userEntity);
 
-        MoneyEntity moneyEntity = new MoneyEntity();
+        MoneyRecordEntity moneyEntity = new MoneyRecordEntity();
         moneyEntity.setMoney(money);
         moneyEntity.setTime(new Timestamp(System.currentTimeMillis()));
         moneyEntity.setType(1);
@@ -80,7 +80,7 @@ public class MoneyController {
         session.saveOrUpdate(userEntity);
 
 
-        MoneyEntity moneyEntity = new MoneyEntity();
+        MoneyRecordEntity moneyEntity = new MoneyRecordEntity();
         moneyEntity.setMoney(money);
         moneyEntity.setTime(new Timestamp(System.currentTimeMillis()));
         moneyEntity.setType(-1);
@@ -91,6 +91,19 @@ public class MoneyController {
         session.close();
 
         return new Response<>(Response.CODE_SUCCESS, Content.Message.MSG_MONEY_WITHDRAW_SUCCESS, new NormalResponseData(NormalResponseData.CODE_SUCCESS));
+    }
+
+    @RequestMapping("/getMoneyRecord")
+    @ResponseBody
+    public Response<List<MoneyRecordEntity>> getMoneyRecord(
+            HttpServletRequest request) {
+        String userId = (String) request.getAttribute("userId");
+        Session session = Dao.getInstance().getSession();
+        Criteria criteria = session.createCriteria(MoneyRecordEntity.class);
+        criteria.add(Restrictions.eq("userId", userId));
+        List<MoneyRecordEntity> userEntities = criteria.list();
+        session.close();
+        return new Response<>(Response.CODE_SUCCESS, Content.Message.MSG_MONEY_GET_RECORDE_SUCCESS, userEntities);
     }
 
 }

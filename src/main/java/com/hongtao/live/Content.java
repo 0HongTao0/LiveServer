@@ -38,6 +38,7 @@ public interface Content {
         public static final String MSG_MONEY_RECHARGE_SUCCESS = "充值成功";
         public static final String MSG_MONEY_WITHDRAW_SUCCESS = "提现成功";
         public static final String MSG_MONEY_WITHDRAW_FAIL = "提现失败，余额不足";
+        public static final String MSG_MONEY_GET_RECORDE_SUCCESS = "获取余额记录成功";
     }
 
     class Code{

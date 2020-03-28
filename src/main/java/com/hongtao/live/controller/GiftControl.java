@@ -98,10 +98,10 @@ public class GiftControl {
         toUserEntity.setMoney(toUserEntity.getMoney() + giftEntities.get(0).getPrice() * (1 - PROPORTIONATE));
         session.saveOrUpdate(toUserEntity);
 
-        int id = (int) session.createCriteria(MoneyEntity.class)
+        int id = (int) session.createCriteria(MoneyRecordEntity.class)
                 .setProjection(Projections.projectionList().add(Projections.max("id"))).uniqueResult();
 
-        MoneyEntity fromMoneyEntity = new MoneyEntity();
+        MoneyRecordEntity fromMoneyEntity = new MoneyRecordEntity();
         fromMoneyEntity.setId(id + 1);
         fromMoneyEntity.setUserId(userId);
         fromMoneyEntity.setType(-2);
@@ -109,7 +109,7 @@ public class GiftControl {
         fromMoneyEntity.setMoney(giftEntities.get(0).getPrice());
         session.persist(fromMoneyEntity);
 
-        MoneyEntity toMoneyEntity = new MoneyEntity();
+        MoneyRecordEntity toMoneyEntity = new MoneyRecordEntity();
         toMoneyEntity.setId(id + 2);
         toMoneyEntity.setUserId(toUserId);
         toMoneyEntity.setType(2);

@@ -1,6 +1,5 @@
 package com.hongtao.live.dao.entity;
 
-import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Objects;
 
@@ -12,9 +11,8 @@ import javax.persistence.*;
  * @author HongTao
  */
 @Entity
-@Table(name = "money", schema = "Live", catalog = "Live")
-public class MoneyEntity implements Serializable {
-    private static final long serialVersionUID = 0L;
+@Table(name = "money_record", schema = "Live", catalog = "Live")
+public class MoneyRecordEntity {
     private int mId;
     private String mUserId;
     private double mMoney;
@@ -23,7 +21,6 @@ public class MoneyEntity implements Serializable {
 
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy=GenerationType.AUTO)
     public int getId() {
         return mId;
     }
@@ -76,7 +73,7 @@ public class MoneyEntity implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        MoneyEntity that = (MoneyEntity) o;
+        MoneyRecordEntity that = (MoneyRecordEntity) o;
         return mId == that.mId &&
                 Double.compare(that.mMoney, mMoney) == 0 &&
                 mType == that.mType &&

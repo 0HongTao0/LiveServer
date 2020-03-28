@@ -1,5 +1,4 @@
 import com.hongtao.live.Content;
-import com.hongtao.live.dao.entity.MoneyEntity;
 import com.hongtao.live.dao.entity.RoomEntity;
 import com.hongtao.live.dao.entity.UserEntity;
 import com.hongtao.live.module.RoomData;
@@ -11,7 +10,6 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
-import org.hibernate.criterion.Projections;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -82,9 +80,6 @@ public class UserDaoTest {
 //        toMoneyEntity.setTime(new Timestamp(System.currentTimeMillis()));
 //        toMoneyEntity.setMoney(25);
 //        session.save(toMoneyEntity);
-        int id = (int) session.createCriteria(MoneyEntity.class)
-                .setProjection(Projections.projectionList().add(Projections.max("id"))).uniqueResult();
-        logger.warn(String.valueOf(id));
         tx.commit();
         session.close();
 
