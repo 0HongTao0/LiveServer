@@ -11,10 +11,11 @@
         <property name="nick" column="nick"/>
         <property name="birthday" column="birthday"/>
         <property name="introduction" column="introduction"/>
-        <property name="gender" column="gender"/>
         <property name="job" column="job"/>
         <property name="address" column="address"/>
         <property name="liveIntroduction" column="liveIntroduction"/>
         <property name="avatar" column="avatar"/>
+        <property name="gender" column="gender"/>
+        <property name="money" column="money"/>
     </class>
 </hibernate-mapping>

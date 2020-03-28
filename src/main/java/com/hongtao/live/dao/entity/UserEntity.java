@@ -14,8 +14,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "user", schema = "Live", catalog = "Live")
-public
-class UserEntity {
+public class UserEntity {
     private int mId;
     private String mUserId;
     private String mPassword;
@@ -27,6 +26,7 @@ class UserEntity {
     private String mAddress = "";
     private String mLiveIntroduction = "来呀，直播间里面很好玩哦！";
     private String mAvatar = "https://raw.githubusercontent.com/0HongTao0/Blog/master/default_avatar.png";
+    private Double mMoney;
 
     @Id
     @Column(name = "id")
@@ -176,6 +176,17 @@ class UserEntity {
                 ", mAddress='" + mAddress + '\'' +
                 ", mLiveIntroduction='" + mLiveIntroduction + '\'' +
                 ", mAvatar='" + mAvatar + '\'' +
+                ", mMoney=" + mMoney +
                 '}';
+    }
+
+    @Basic
+    @Column(name = "money")
+    public Double getMoney() {
+        return mMoney;
+    }
+
+    public void setMoney(Double money) {
+        mMoney = money;
     }
 }

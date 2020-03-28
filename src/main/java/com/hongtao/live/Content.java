@@ -6,7 +6,7 @@ package com.hongtao.live;
  * @author HongTao
  */
 public interface Content {
-    String IP = "192.168.0.107";
+    String IP = "192.168.0.110";
 
     class Message{
         public static final String MSG_NO_TOKEN = "未携带token";
@@ -30,6 +30,14 @@ public interface Content {
         public static final String MSG_ATTENTION_ROOM_SUCCESS = "关注直播间成功";
         public static final String MSG_GET_OFF_ATTENTION_ROOM_SUCCESS = "取消关注成功";
         public static final String MSG_GET_ATTENTION_ROOM_SUCCESS = "获取关注成功";
+
+        public static final String MSG_GIFT_GET_SUCCESS = "获取礼物列表成功";
+        public static final String MSG_GIFT_SEND_SUCCESS = "送礼物成功";
+        public static final String MSG_GIFT_SEND_FAIL = "送礼物失败，余额不足";
+
+        public static final String MSG_MONEY_RECHARGE_SUCCESS = "充值成功";
+        public static final String MSG_MONEY_WITHDRAW_SUCCESS = "提现成功";
+        public static final String MSG_MONEY_WITHDRAW_FAIL = "提现失败，余额不足";
     }
 
     class Code{

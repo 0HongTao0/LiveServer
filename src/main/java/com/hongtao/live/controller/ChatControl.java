@@ -36,8 +36,7 @@ public class ChatControl {
     @ResponseBody
     public Response<NormalResponseData> sendMessage(HttpServletRequest request
             , @RequestParam int roomId
-            , @RequestParam String message
-            , @RequestParam int type) {
+            , @RequestParam String message) {
         String userId = (String) request.getAttribute("userId");
         Session session = Dao.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
@@ -45,7 +44,7 @@ public class ChatControl {
         chatEntity.setUserId(userId);
         chatEntity.setRoomId(roomId);
         chatEntity.setMessage(message);
-        chatEntity.setType(type);
+        chatEntity.setType(1);
         chatEntity.setTime(new Timestamp(System.currentTimeMillis()));
         session.save(chatEntity);
         transaction.commit();

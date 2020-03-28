@@ -65,33 +65,32 @@ public class RTMPController {
     }
 
     private void changeLiving(String userId, boolean isLiving) {
+
         Session session = Dao.getInstance().getSession();
+        session.beginTransaction();
+
         Criteria criteria = session.createCriteria(RoomEntity.class);
         criteria.add(Restrictions.eq("userId", userId));
         RoomEntity roomEntities = (RoomEntity) criteria.list().get(0);
-        session.close();
 
-        Session session1 = Dao.getInstance().getSession();
-        session1.beginTransaction();
         roomEntities.setLiving(isLiving ? 1 : 0);
-        session1.update(roomEntities);
-        session1.getTransaction().commit();
-        session1.close();
+        session.update(roomEntities);
+        session.getTransaction().commit();
+        session.close();
     }
 
     private void changeNum(String userId, int addNum) {
         Session session = Dao.getInstance().getSession();
+        session.beginTransaction();
+
         Criteria criteria = session.createCriteria(RoomEntity.class);
         criteria.add(Restrictions.eq("userId", userId));
         RoomEntity roomEntities = (RoomEntity) criteria.list().get(0);
-        session.close();
 
-        Session session1 = Dao.getInstance().getSession();
-        session1.beginTransaction();
         roomEntities.setNum(roomEntities.getNum() + addNum);
-        session1.update(roomEntities);
-        session1.getTransaction().commit();
-        session1.close();
+        session.update(roomEntities);
+        session.getTransaction().commit();
+        session.close();
     }
 
 }

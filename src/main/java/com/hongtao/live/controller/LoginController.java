@@ -50,18 +50,17 @@ public class LoginController {
     @RequestMapping(value = "/registered", method = {RequestMethod.POST})
     @ResponseBody
     public Response<LoginData> registered(@RequestParam String userId, @RequestParam String password) {
-        Session session1 = Dao.getInstance().getSession();
-        Criteria criteria = session1.createCriteria(UserEntity.class);
-        criteria.add(Restrictions.eq("userId", userId));
-        criteria.add(Restrictions.eq("password", password));
-        List<UserEntity> users = criteria.list();
-        if (users.size() != 0) {
-            return new Response<>(Response.CODE_SUCCESS, Content.Message.MSG_REGISTERED_FAIL_SAME_ID, new LoginData("",Content.Code.CODE_REGISTERED_FAIL_SAME_ID));
-        }
-        session1.close();
-
         Session session = Dao.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
+
+        Criteria criteria = session.createCriteria(UserEntity.class);
+        criteria.add(Restrictions.eq("userId", userId));
+        List<UserEntity> users = criteria.list();
+        if (users.size() != 0) {
+            session.close();
+            return new Response<>(Response.CODE_SUCCESS, Content.Message.MSG_REGISTERED_FAIL_SAME_ID, new LoginData("", Content.Code.CODE_REGISTERED_FAIL_SAME_ID));
+        }
+
         UserEntity userEntity = new UserEntity();
         userEntity.setNick(userId);
         userEntity.setUserId(userId);

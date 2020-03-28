@@ -1,13 +1,17 @@
 import com.hongtao.live.Content;
+import com.hongtao.live.dao.entity.MoneyEntity;
 import com.hongtao.live.dao.entity.RoomEntity;
 import com.hongtao.live.dao.entity.UserEntity;
 import com.hongtao.live.module.RoomData;
 import com.sun.org.slf4j.internal.Logger;
 import com.sun.org.slf4j.internal.LoggerFactory;
 
-import org.hibernate.*;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
-import org.hibernate.criterion.Restrictions;
+import org.hibernate.criterion.Projections;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -60,10 +64,27 @@ public class UserDaoTest {
 //        ue.setPassword("123");
 //        ue.setBirthday(new Date(946656000000L));
 //        session.save(ue);
-        Criteria criteria = session.createCriteria(UserEntity.class);
-        criteria.add(Restrictions.eq("userId", "935245421"));
-        List<UserEntity> users = criteria.list();
-        logger.warn(users.toString());
+//        Criteria criteria = session.createCriteria(UserEntity.class);
+//        criteria.add(Restrictions.eq("userId", "935245421"));
+//        List<UserEntity> users = criteria.list();
+//        logger.warn(users.toString());
+
+//        MoneyEntity fromMoneyEntity = new MoneyEntity();
+//        fromMoneyEntity.setUserId("935245421");
+//        fromMoneyEntity.setType(-2);
+//        fromMoneyEntity.setTime(new Timestamp(System.currentTimeMillis()));
+//        fromMoneyEntity.setMoney(25);
+//        session.save(fromMoneyEntity);
+//
+//        MoneyEntity toMoneyEntity = new MoneyEntity();
+//        toMoneyEntity.setUserId("935245421");
+//        toMoneyEntity.setType(2);
+//        toMoneyEntity.setTime(new Timestamp(System.currentTimeMillis()));
+//        toMoneyEntity.setMoney(25);
+//        session.save(toMoneyEntity);
+        int id = (int) session.createCriteria(MoneyEntity.class)
+                .setProjection(Projections.projectionList().add(Projections.max("id"))).uniqueResult();
+        logger.warn(String.valueOf(id));
         tx.commit();
         session.close();
 

@@ -7,6 +7,7 @@ package com.hongtao.live.module;
  */
 public class NormalResponseData {
     public static final int CODE_SUCCESS = 1;
+    public static final int CODE_FAIL = -1;
 
     private int code;
 

@@ -35,6 +35,12 @@
         <mapping resource="ChatEntity.hbm.xml"/>
         <mapping class="com.hongtao.live.dao.entity.AttentionEntity"/>
         <mapping resource="AttentionEntity.hbm.xml"/>
+        <mapping resource="GiftSendEntity.hbm.xml"/>
+        <mapping class="com.hongtao.live.dao.entity.GiftSendEntity"/>
+        <mapping class="com.hongtao.live.dao.entity.GiftEntity"/>
+        <mapping resource="GiftEntity.hbm.xml"/>
+        <mapping class="com.hongtao.live.dao.entity.MoneyEntity"/>
+        <mapping resource="MoneyEntity.hbm.xml"/>
 
     </session-factory>
 </hibernate-configuration>
