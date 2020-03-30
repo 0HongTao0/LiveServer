@@ -41,6 +41,12 @@
         <mapping resource="GiftEntity.hbm.xml"/>
         <mapping resource="MoneyRecordEntity.hbm.xml"/>
         <mapping class="com.hongtao.live.dao.entity.MoneyRecordEntity"/>
+        <mapping resource="CityEntity.hbm.xml"/>
+        <mapping class="com.hongtao.live.dao.entity.CityEntity"/>
+        <mapping class="com.hongtao.live.dao.entity.CountryEntity"/>
+        <mapping resource="CountryEntity.hbm.xml"/>
+        <mapping class="com.hongtao.live.dao.entity.ProvinceEntity"/>
+        <mapping resource="ProvinceEntity.hbm.xml"/>
 
     </session-factory>
 </hibernate-configuration>

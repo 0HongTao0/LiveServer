@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.hongtao.live.dao.entity.CountryEntity" table="country" schema="Live">
+        <id name="id" column="id"/>
+        <property name="name" column="name"/>
+        <property name="code" column="code"/>
+        <property name="cityId" column="cityId"/>
+        <property name="provinceId" column="provinceId"/>
+    </class>
+</hibernate-mapping>

@@ -10,6 +10,7 @@ import com.hongtao.live.module.Response;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -101,9 +102,10 @@ public class MoneyController {
         Session session = Dao.getInstance().getSession();
         Criteria criteria = session.createCriteria(MoneyRecordEntity.class);
         criteria.add(Restrictions.eq("userId", userId));
+        criteria.addOrder(Order.desc("time"));
         List<MoneyRecordEntity> userEntities = criteria.list();
         session.close();
-        return new Response<>(Response.CODE_SUCCESS, Content.Message.MSG_MONEY_GET_RECORDE_SUCCESS, userEntities);
+        return new Response<>(Response.CODE_SUCCESS, Content.Message.MSG_MONEY_GET_RECORD_SUCCESS, userEntities);
     }
 
 }
