@@ -97,7 +97,7 @@ public class UserDaoTest {
     @Test
     public void select() {
         Query query =
-                session.createQuery("from RoomEntity as r, UserEntity as u where u.userId = r.userId and r.living = 1 and u.nick like '1%'");
+                session.createQuery("from RoomEntity as r, UserEntity as u where u.userId = r.userId and r.living = 1 and (u.nick like '%" + "风" + "%' or r.roomIntroduction like '%" + "风" + "%')");
         List<Object> list = query.list();
         logger.warn(list.toString());
     }

@@ -143,7 +143,7 @@ public class RoomController {
         System.out.println(roomKey);
         Session session = Dao.getInstance().getSession();
         Query query =
-                session.createQuery("from RoomEntity as r, UserEntity as u where u.userId = r.userId and r.living = 1 and u.nick like '%" + roomKey + "%'");
+                session.createQuery("from RoomEntity as r, UserEntity as u where u.userId = r.userId and r.living = 1 and (u.nick like '%" + roomKey + "%' or r.roomIntroduction like '%" + roomKey + "%')");
         List<Object> list = query.list();
         List<RoomData> roomData = new ArrayList<>();
         for (int i = 0; i < list.size(); i++) {
