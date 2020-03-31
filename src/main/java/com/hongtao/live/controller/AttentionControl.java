@@ -9,9 +9,11 @@ import com.hongtao.live.module.AttentionData;
 import com.hongtao.live.module.NormalResponseData;
 import com.hongtao.live.module.Response;
 
+import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -53,14 +55,19 @@ public class AttentionControl {
     @ResponseBody
     public Response<NormalResponseData> getOffRoom(HttpServletRequest request, @RequestParam int roomId) {
         String userId = (String) request.getAttribute("userId");
-        Session session = Dao.getInstance().getSession();
-        Transaction transaction = session.beginTransaction();
-        Query query = session.createQuery("delete Attention where roomId = :roomId and userId = :userId")
-                .setInteger("roomId", roomId)
-                .setString("userId", userId);
-        query.executeUpdate();
-        transaction.commit();
-        session.close();
+        try {
+            Session session = Dao.getInstance().getSession();
+            Transaction transaction = session.beginTransaction();
+            Criteria criteria = session.createCriteria(AttentionEntity.class);
+            criteria.add(Restrictions.eq("userId", userId));
+            criteria.add(Restrictions.eq("roomId", roomId));
+            AttentionEntity attentionEntity = (AttentionEntity) criteria.uniqueResult();
+            session.delete(attentionEntity);
+            transaction.commit();
+            session.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return new Response<>(Response.CODE_SUCCESS, Content.Message.MSG_GET_OFF_ATTENTION_ROOM_SUCCESS, new NormalResponseData(NormalResponseData.CODE_SUCCESS));
     }
 
