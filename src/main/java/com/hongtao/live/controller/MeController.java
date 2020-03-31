@@ -225,7 +225,8 @@ public class MeController {
             // 得到文件的原始名称，如：美女.png
             String fileName = avatar.getOriginalFilename();
             // 通过文件的原始名称，可以对上传文件类型做限制，如：只能上传jpg和png的图片文件
-            if (fileName.endsWith("jpg") || fileName.endsWith("png")) {
+            if (fileName.endsWith("jpg") || fileName.endsWith("png") || fileName.endsWith("jpeg") || fileName.endsWith("webp") ||
+                    fileName.endsWith("JPG") || fileName.endsWith("PNG") || fileName.endsWith("JPEG") || fileName.endsWith("WEBP")) {
                 File file = new File(path, fileName);
                 avatar.transferTo(file);
 
