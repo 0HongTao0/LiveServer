@@ -27,7 +27,7 @@ import java.util.List;
 @RequestMapping("/address")
 public class AddressController {
 
-    @RequestMapping(value = "/getProvince", method = RequestMethod.POST)
+    @RequestMapping(value = "/getProvince", method = RequestMethod.GET)
     @ResponseBody
     public Response<List<ProvinceEntity>> getProvince() {
         Session session = Dao.getInstance().getSession();
@@ -38,7 +38,7 @@ public class AddressController {
         return new Response<>(Response.CODE_SUCCESS, Content.Message.MSG_ADDRESS_GET_SUCCESS, provinceEntities);
     }
 
-    @RequestMapping(value = "/getCity", method = RequestMethod.POST)
+    @RequestMapping(value = "/getCity", method = RequestMethod.GET)
     @ResponseBody
     public Response<List<CityEntity>> getCity(@RequestParam("provinceId") int provinceId) {
         Session session = Dao.getInstance().getSession();
@@ -50,7 +50,7 @@ public class AddressController {
         return new Response<>(Response.CODE_SUCCESS, Content.Message.MSG_ADDRESS_GET_SUCCESS, cityEntities);
     }
 
-    @RequestMapping(value = "/getCountry", method = RequestMethod.POST)
+    @RequestMapping(value = "/getCountry", method = RequestMethod.GET)
     @ResponseBody
     public Response<List<CountryEntity>> getCountry(@RequestParam("cityId") int cityId) {
         Session session = Dao.getInstance().getSession();

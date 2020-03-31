@@ -24,7 +24,7 @@ public class UserEntity {
     private int mGender = 1;
     private String mJob = "网红兼职";
     private String mAddress = "广东省-广州市-番禺区";
-    private int mAddressId = 1697;
+    private int mAddressId = 440113;
     private String mLiveIntroduction = "来呀，直播间里面很好玩哦！";
     private String mAvatar = "https://raw.githubusercontent.com/0HongTao0/Blog/master/default_avatar.png";
     private Double mMoney;
@@ -183,5 +183,24 @@ public class UserEntity {
 
     public void setAddressId(int addressId) {
         mAddressId = addressId;
+    }
+
+    @Override
+    public String toString() {
+        return "UserEntity{" +
+                "mId=" + mId +
+                ", mUserId='" + mUserId + '\'' +
+                ", mPassword='" + mPassword + '\'' +
+                ", mNick='" + mNick + '\'' +
+                ", mBirthday=" + mBirthday +
+                ", mIntroduction='" + mIntroduction + '\'' +
+                ", mGender=" + mGender +
+                ", mJob='" + mJob + '\'' +
+                ", mAddress='" + mAddress + '\'' +
+                ", mAddressId=" + mAddressId +
+                ", mLiveIntroduction='" + mLiveIntroduction + '\'' +
+                ", mAvatar='" + mAvatar + '\'' +
+                ", mMoney=" + mMoney +
+                '}';
     }
 }

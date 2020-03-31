@@ -128,7 +128,6 @@ public class MeController {
         Criteria userCriteria = session.createCriteria(UserEntity.class);
         userCriteria.add(Restrictions.eq("userId", userId));
         UserEntity userEntity = (UserEntity) userCriteria.uniqueResult();
-        userEntity.setAddressId(addressId);
 
         StringBuilder addressStringBuilder = new StringBuilder();
 
@@ -148,10 +147,11 @@ public class MeController {
         addressStringBuilder.append(cityEntity.getName()).append("-");
         addressStringBuilder.append(countryEntity.getName());
 
-
+        userEntity.setAddressId(addressId);
         userEntity.setAddress(addressStringBuilder.toString());
+        System.out.println(userEntity.toString());
 
-        session.saveOrUpdate(userEntity);
+        session.update(userEntity);
         transaction.commit();
         session.close();
 

@@ -6,7 +6,7 @@ package com.hongtao.live;
  * @author HongTao
  */
 public interface Content {
-    String IP = "192.168.0.107";
+    String IP = "192.168.0.106";
 
     class Message {
         public static final String MSG_NO_TOKEN = "未携带token";

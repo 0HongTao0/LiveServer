@@ -13,8 +13,11 @@ import org.hibernate.cfg.Configuration;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created 2020/3/13.
@@ -80,9 +83,15 @@ public class UserDaoTest {
 //        toMoneyEntity.setTime(new Timestamp(System.currentTimeMillis()));
 //        toMoneyEntity.setMoney(25);
 //        session.save(toMoneyEntity);
-        tx.commit();
-        session.close();
+//        tx.commit();
+//        session.close();
 
+
+        try {
+            System.out.println(new SimpleDateFormat("yyyy-MM-dd", Locale.CHINA).parse("Mon Mar 30 21:03:12 GMT+08:00 2020").getTime() / 1000);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 
     @Test

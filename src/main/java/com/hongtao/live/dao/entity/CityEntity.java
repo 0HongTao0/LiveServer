@@ -14,7 +14,6 @@ import javax.persistence.*;
 public class CityEntity {
     private int mId;
     private String mName;
-    private String mCode;
     private int mProvinceId;
 
     @Id
@@ -38,16 +37,6 @@ public class CityEntity {
     }
 
     @Basic
-    @Column(name = "code")
-    public String getCode() {
-        return mCode;
-    }
-
-    public void setCode(String code) {
-        mCode = code;
-    }
-
-    @Basic
     @Column(name = "provinceId")
     public int getProvinceId() {
         return mProvinceId;
@@ -64,12 +53,11 @@ public class CityEntity {
         CityEntity that = (CityEntity) o;
         return mId == that.mId &&
                 mProvinceId == that.mProvinceId &&
-                Objects.equals(mName, that.mName) &&
-                Objects.equals(mCode, that.mCode);
+                Objects.equals(mName, that.mName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(mId, mName, mCode, mProvinceId);
+        return Objects.hash(mId, mName, mProvinceId);
     }
 }

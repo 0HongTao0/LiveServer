@@ -13,6 +13,7 @@
         <property name="introduction" column="introduction"/>
         <property name="job" column="job"/>
         <property name="address" column="address"/>
+        <property name="addressId" column="addressId"/>
         <property name="liveIntroduction" column="liveIntroduction"/>
         <property name="avatar" column="avatar"/>
         <property name="gender" column="gender"/>

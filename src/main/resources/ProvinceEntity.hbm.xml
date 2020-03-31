@@ -7,6 +7,5 @@
     <class name="com.hongtao.live.dao.entity.ProvinceEntity" table="province" schema="Live">
         <id name="id" column="id"/>
         <property name="name" column="name"/>
-        <property name="code" column="code"/>
     </class>
 </hibernate-mapping>
