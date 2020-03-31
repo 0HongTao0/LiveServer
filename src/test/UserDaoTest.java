@@ -97,9 +97,7 @@ public class UserDaoTest {
     @Test
     public void select() {
         Query query =
-                session.createQuery("from RoomEntity as r, UserEntity as u where r.userId = :userId and u.userId = :userId and u.userId = r.userId")
-                        .setString("userId", "935245421")
-                        .setString("userId", "935245421");
+                session.createQuery("from RoomEntity as r, UserEntity as u where u.userId = r.userId and r.living = 1 and u.nick like '1%'");
         List<Object> list = query.list();
         logger.warn(list.toString());
     }

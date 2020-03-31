@@ -112,7 +112,6 @@ public class RoomController {
         session.close();
 
 
-
         return new Response<>(Response.CODE_SUCCESS, Content.Message.MSG_ROOM_UPDATE_SUCCESS, RoomData.createRoom(Content.Code.CODE_ROOM_UPDATE, roomEntity, users.get(0)));
     }
 
@@ -122,6 +121,29 @@ public class RoomController {
         Session session = Dao.getInstance().getSession();
         Query query =
                 session.createQuery("from RoomEntity as r, UserEntity as u where u.userId = r.userId and r.living = 1");
+        List<Object> list = query.list();
+        List<RoomData> roomData = new ArrayList<>();
+        for (int i = 0; i < list.size(); i++) {
+            RoomEntity roomEntity = (RoomEntity) ((Object[]) list.get(i))[0];
+            UserEntity userEntity = (UserEntity) ((Object[]) list.get(i))[1];
+            roomData.add(RoomData.createRoom(Content.Code.CODE_ROOM_EXIST, roomEntity, userEntity));
+        }
+        for (int i = 0; i < roomData.size(); i++) {
+            Criteria criteria = session.createCriteria(AttentionEntity.class);
+            criteria.add(Restrictions.eq("roomId", roomData.get(i).getRoomId()));
+            roomData.get(i).setAttention(criteria.list().size() > 0);
+        }
+        session.close();
+        return new Response<>(Response.CODE_SUCCESS, Content.Message.MSG_ROOM_GET_SUCCESS, roomData);
+    }
+
+    @RequestMapping("/searchRooms")
+    @ResponseBody
+    public Response<List<RoomData>> searchRooms(@RequestParam String roomKey) {
+        System.out.println(roomKey);
+        Session session = Dao.getInstance().getSession();
+        Query query =
+                session.createQuery("from RoomEntity as r, UserEntity as u where u.userId = r.userId and r.living = 1 and u.nick like '%" + roomKey + "%'");
         List<Object> list = query.list();
         List<RoomData> roomData = new ArrayList<>();
         for (int i = 0; i < list.size(); i++) {
